@@ -1,0 +1,25 @@
+{
+  "name": "learnjs",
+  "version": "1.0.0",
+  "description": "code of Learning Javascript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zjjfly/LeaningJs.git"
+  },
+  "keywords": [
+    "javascript"
+  ],
+  "author": "zjjfly",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zjjfly/LeaningJs/issues"
+  },
+  "homepage": "https://github.com/zjjfly/LeaningJs#readme",
+  "dependencies": {
+    "underscore": "^1.8.3"
+  }
+}

@@ -13,7 +13,9 @@
     "indent": [
       "error",
       4,
-      {"SwitchCase":1}
+      {
+        "SwitchCase": 1
+      }
     ],
     "linebreak-style": [
       "error",
@@ -22,13 +24,24 @@
     "quotes": [
       "error",
       "double",
-      { "allowTemplateLiterals": true }
+      {
+        "allowTemplateLiterals": true
+      }
     ],
     "semi": [
       "error",
       "always"
     ],
     //未使用的本地变量提示错误
-    "no-unused-vars": ["error", { "vars": "local" }]
+    "no-unused-vars": [
+      "error",
+      {
+        "vars": "local"
+      }
+    ],
+    "linebreak-style": [
+      "warn",
+      "unix"
+    ]
   }
 }

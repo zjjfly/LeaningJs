@@ -22,5 +22,7 @@ p=p^FLAG_WRITE;//异或操作，关闭写的权限
 console.log(p);//1
 p=p^FLAG_WRITE;//异或操作，开启写的权限
 console.log(p);
-const hasReadAndExecute = p & (FLAG_READ | FLAG_EXECUTE);
+//原文有错误，应该如下
+let mask = FLAG_READ | FLAG_EXECUTE;
+let hasReadAndExecute = (p & mask) === mask;
 console.log(hasReadAndExecute);

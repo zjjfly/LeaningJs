@@ -8,6 +8,7 @@ const fs = require("fs");
 //以之前说过的读三个文件，等待一分钟后把三个文件的内容写入第四个文件
 
 //下面这个方法是把node的error-first形式的callback变换成Promise
+//一般不自己写，推荐使用Q
 function nfcall(f, ...args) {
     return new Promise(function (resolve, reject) {
         f.call(null, ...args, function (err, ...args) {

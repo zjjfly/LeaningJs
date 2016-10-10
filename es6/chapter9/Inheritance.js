@@ -58,6 +58,6 @@
             return !!this[_POLICY];
         };
     }
-
+    makeInsurable1(Car.prototype);
 
 })();

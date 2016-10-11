@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple HTMl</title>
+    <style>
+        .callout {
+            border: solid 1px #ff0080;
+            margin: 2px 4px;
+            padding: 2px 6px;
+        }
+
+        .code {
+            background: #ccc;
+            margin: 1px 2px;
+            padding: 1px 4px;
+            font-family: monospace;
+        }
+
+        .highlight {
+            background: #ff0;
+            font-style: italic;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            //自己实现的DOM遍历方法
+            printDOM(document, "");
+            //使用原生的API遍历DOM的方法
+            treeWalker();
+            //通过id获取元素
+            const content = document.getElementById("content");
+            console.log(content);
+            //通过class获取元素
+            const callouts = document.getElementsByClassName("callout");
+            console.log(callouts);
+            //通过tag名获取元素
+            const paras = document.getElementsByTagName("p");
+            console.log(paras);
+            //所以上面这些获取元素的方法返回的都不是数组,而是HTMLCollection,可以使用for循环遍历,但不能使用map,filter这些方法
+            //可以使用...把它转成数组
+            const arr = [...document.getElementsByTagName("p")];
+            console.log(arr);
+            arr.map(e=>e.textContent).forEach(s=>console.log(s));
+
+            //使用css选择器
+            const nodeList = document.querySelectorAll("#content span");
+            console.log(nodeList);
+            //>表示选取节点的直接子节点
+            console.log(document.querySelectorAll("#content > p"));
+
+            //操作节点,textContent和innerHTML都会替换元素中所有的内容,无论多大多复杂
+            setTimeout(function () {
+                const para1 = document.getElementsByTagName("p")[0];
+                para1.textContent = "Modified HTML file";
+            }, 1000);
+            setTimeout(function () {
+                const para1 = document.getElementsByTagName("p")[0];
+                para1.innerHTML = "<i>Modified</i>HTML file";
+            }, 2000);
+
+            //生成新的节点,使用createElement方法,但它不会加到DOM中去
+            const p1 = document.createElement("p");
+            const p2 = document.createElement("p");
+            p1.textContent = "I was created dynamically!";
+            p2.textContent = "I was also created dynamically!";
+            //把p1加到<div id="content">的第一个元素后面,p2加到最后
+            const parent = document.getElementById("content");
+            const first = parent.firstChild;
+            parent.insertBefore(p1, first);
+            parent.appendChild(p2);
+            //如果要加在某个元素后面,使用insertBefore和nextSibling
+            parent.insertBefore(p1, parent.childNodes[3]);
+
+            //如果想要改变一个元素的style,最好是创建一个css类别,然后把元素的class属性改成这个类别
+            //highlightParas("unique");
+            //修改元素的属性
+            //changeData();
+
+            const highlightActions = document.querySelectorAll("[data-action='highlight']");
+            for (let a of highlightActions) {
+                a.addEventListener("click", evt => {
+                    //阻止事件默认的行为
+                    evt.preventDefault();
+                    highlightParas(a.dataset.containing);
+                });
+            }
+            const removeHighlightActions = document.querySelectorAll("[data-action='removeHighlights']");
+            for (let a of removeHighlightActions) {
+                a.addEventListener("click", evt => {
+                    evt.preventDefault();
+                    removeParaHighlights();
+                });
+            }
+        };
+        function changeData() {
+            //搜索有特定属性的元素
+            const highlightActions = document.querySelectorAll("[data-action='highlight']");
+            highlightActions[0].dataset.containing = "giraffe";
+            highlightActions[0].dataset.caseSensitive = "true";
+        }
+        function highlightParas(containing) {
+            if (typeof containing === "string")
+                containing = new RegExp(`\\b${containing}\\b`, "i");
+            const paras = document.getElementsByTagName("p");
+            console.log(paras);
+            for (let p of paras) {
+                if (!containing.test(p.textContent)) continue;
+                //元素都有classList属性存放这个元素所以的class,它有一个add方法可以添加class
+                p.classList.add("highlight");
+            }
+        }
+        function removeParaHighlights() {
+            const paras = document.querySelectorAll("p.highlight");
+            for (let p of paras) {
+                //可以使用classList的remove方法去除某个class
+                p.classList.remove("highlight");
+            }
+        }
+
+        function treeWalker() {
+            var treeWalker = document.createTreeWalker(
+                    document.body,
+                    NodeFilter.SHOW_ELEMENT
+            );
+
+            var nodeList = [];
+
+            while (treeWalker.nextNode()) nodeList.push(treeWalker.currentNode);
+            console.log(nodeList);
+            console.log(document.URL);
+        }
+        function printDOM(node, prefix) {
+            console.log(prefix + node.nodeName);
+            for (let i = 0; i < node.childNodes.length; i++) {
+                printDOM(node.childNodes[i], prefix + "\t");
+            }
+        }
+    </script>
+</head>
+<body>
+<header>
+    <h1>Simple HTML</h1>
+</header>
+<div id="content">
+    <p>This is a <i>simple</i> HTML file.</p>
+    <div class="callout">
+        <p>This is as fancy as we"ll get!</p>
+    </div>
+    <p>IDs (such as <span class="code">#content</span>) are unique (there can only be one per page).</p>
+    <p>Classes (such as <span class="code">.callout</span>) can be used on many elements.</p>
+    <div id="callout2" class="callout fancy">
+        <p>A single HTML element can have multiple classes.</p>
+    </div>
+</div>
+<!--html5新引入的data属性-->
+<button data-action="highlight" data-containing="unique"> Highlight paragraphs containing "unique"
+</button>
+<button data-action="removeHighlights">
+    Remove highlights
+</button>
+<div class="serverInfo">
+    Server is running on <span data-replace="platform">???</span> with Node <span data-replace="nodeVersion">???</span>.
+    It has been up for <span data-replace="uptime">???</span> seconds.
+</div>
+<script !src="">
+    function refreshServerInfo() {
+        const req = new XMLHttpRequest();
+        req.addEventListener('load', function () {
+                    const data = JSON.parse(this.responseText);
+                    replace(data);
+                }
+        );
+        req.open('GET', 'http://localhost:7070', true);
+        req.send();
+    }
+    function replace(data) {
+        const serverInfo = document.querySelector(".serverInfo");
+         for (let p of Object.keys(data)) {
+             const ele = serverInfo.querySelectorAll(`[data-replace="${p}"]`);
+             for (let r of ele) {
+                 r.textContent=data[p];
+             }
+         }
+    }
+    refreshServerInfo();
+    setInterval(refreshServerInfo,3000);
+</script>
+</body>
+</html>

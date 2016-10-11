@@ -9,7 +9,7 @@ gulp.task("babel", function () {
         .pipe(babel())
         .pipe(gulp.dest("public/dist"));
 });
-gulp.task("eslint",["babel"], function () {
+gulp.task("eslint", function () {
     return gulp.src(["es6/**/*.js", "public/es6/**/*.js"])
         .pipe(eslint())
         .pipe(eslint.format())

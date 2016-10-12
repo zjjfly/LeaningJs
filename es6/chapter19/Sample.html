@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery Sample</title>
+</head>
+<style>
+    .red {
+        color: #ff0000;
+    }
+    .error{
+        background-color: red;
+    }
+</style>
+<body>
+<script src="../../js/jQuery.js"></script>
+<div id="test1">
+    <p>1</p>
+    <p>2</p>
+    <p>3</p>
+</div>
+<div id="test2">
+    <p>aa</p>
+</div>
+<button onclick="addClass()">add class</button>
+<button onclick="removeClass()">remove class</button>
+<button onclick="toggleClass()">toggle class</button>
+<div class="serverInfo">
+    Server is running on <span data-replace="platform">???</span> with Node <span data-replace="nodeVersion">???</span>.
+    It has been up for <span data-replace="uptime">???</span> seconds.
+</div>
+<script>
+    //jQuery允许当dom加载完成后调用某个函数
+    $(document).ready(()=> {
+        console.log("load complete!");
+    });
+    //可以简写成
+    $(()=> {
+        //使用css选择器调用jquery
+        const $paras = $("div#test1 p");
+        console.log($paras.length);
+        console.log(typeof $paras);
+        console.log($paras instanceof $);
+        console.log($paras instanceof jQuery);
+
+        //使用HTML调用jQuery
+        const $newPara = $("<p>Newly created paragraph...</p>");
+        setTimeout(()=> {
+            //替换所有p标签的文本内容
+            $paras.text("All paragraphs replaced");
+        }, 1000);
+        setTimeout(()=> {
+            //替换所有p标签的html内容
+            $paras.html("<i>All</i> paragraphs replaced");
+        }, 2000);
+        setTimeout(()=> {
+            //替换第三个p标签的的内容
+            $paras.eq(2)
+                    .html("<i>Third</i> paragraphs replaced");
+        }, 3000);
+        setTimeout(()=> {
+            //删除所有p标签
+            $paras.remove();
+        }, 4000);
+        //在元素中增加一个子元素
+        $paras.append("<sup>*</sup>");
+        $paras.append($newPara);
+        //在元素前后新增同级元素
+        $paras.after("<hr>")
+                .before("<hr>");
+        $("<sub>@</sub>").appendTo($paras);//等价于$paras.append("<sub>*</sub>")
+        $("<hr>").insertBefore($paras);//等价于$paras.after("<hr>")
+        $("<hr>").insertAfter($paras);//等价于$paras.before("<hr>")
+    });
+    function addClass() {
+        $("div#test2 p").addClass("red");
+    }
+    function removeClass() {
+        $("div#test2 p").removeClass("red");
+    }
+    function toggleClass() {
+        $("div#test2 p").toggleClass("red");
+    }
+    function refreshServerInfo() {
+        const $serverInfo = $(".serverInfo");
+        //jQuery的ajax方法
+        $.get("http://localhost:7070").then(
+                function (data) {
+                    Object.keys(data).forEach(p=>{
+                        $(`[data-replace="${p}"]`).text(data[p]);
+                    });
+                },
+                function (jqXHR, textStatus, err) {
+                    console.error(err);
+                    $serverInfo.addClass("error").html("Erro connecting to server");
+                }
+        )
+    }
+    refreshServerInfo();
+    setInterval(refreshServerInfo,3000);
+</script>
+</body>
+</html>

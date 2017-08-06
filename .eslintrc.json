@@ -1,10 +1,14 @@
 {
   "env": {
+    "browser": true,
+    "commonjs": true,
     "es6": true,
     "node": true
   },
-  "extends": "eslint:recommended",
   "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
     "sourceType": "module"
   },
   "rules": {
@@ -22,8 +26,8 @@
       "unix"
     ],
     "quotes": [
-      "error",
-      "double",
+      "warn",
+      "single",
       {
         "allowTemplateLiterals": true
       }

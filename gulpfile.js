@@ -13,7 +13,7 @@ gulp.task('eslint', function () {
 });
 gulp.task('autoCompile', function () {
     gulp.watch('es6/**/*.js', function (event) {
-        console.log('File ' + event.path + ' was ' + event.type +'.');
+        console.log('File ' + event.path + ' was ' + event.type + '.');
         if ('changed' === event.type || 'added' === event.type) {
             compile(event.path);
         }

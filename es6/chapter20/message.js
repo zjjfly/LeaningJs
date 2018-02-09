@@ -1,7 +1,7 @@
 /**
  * Created by zjjfly on 2016/10/12.
  */
-"use strict";
+'use strict';
 let lastMessage;
 module.exports = function (prefix) {
     return function (message) {

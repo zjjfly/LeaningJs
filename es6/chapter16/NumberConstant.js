@@ -1,7 +1,7 @@
 /**
  * Created by zjjfly on 2016/10/7.
  */
-"use strict";
+'use strict';
 console.log(Math.E);//自然对数
 console.log(Math.PI);
 console.log(Math.LN2);//ln2

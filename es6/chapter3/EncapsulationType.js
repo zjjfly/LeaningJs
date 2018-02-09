@@ -1,7 +1,7 @@
 /**
  * Created by zjjfly on 16/9/12.
  */
-const s="Hello";
+const s='Hello';
 console.log(s.toUpperCase());
 //一开始s是一个原始类型的字符串，当它调用toUpperCase方法的时候
 //js会临时产生一个String对象，然后调用相应的方法，调用结束得到返回值后，这个对象就会被销毁。

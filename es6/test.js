@@ -1,11 +1,11 @@
 /**
  * Created by zjjfly on 16/9/10.
  */
-"use strict";
+'use strict';
 //es6新特性：块
 const sentences = [
-    {subject: "Javascript", verb: "is", object: "great"},
-    {subject: "Elephants", verb: "are", object: "large"},
+    {subject: 'Javascript', verb: 'is', object: 'great'},
+    {subject: 'Elephants', verb: 'are', object: 'large'},
 ];
 //es6新特性：对象解构
 function say({subject, verb, object}) {

@@ -1,7 +1,7 @@
 /**
  * Created by zjjfly on 2016/10/13.
  */
-"use strict";
+'use strict';
 const coefficients = {
     a: 1,
     c: 5
@@ -20,18 +20,18 @@ console.log(evaluate(3, betterCoefficients));
 
 //代理可以用来限制对属性或方法的访问
 var cook = {
-    name: "Walt",
+    name: 'Walt',
     redPhosphorus: 100, // dangerous
     water: 500, // safe
 };
 const protectedCook = new Proxy(cook, {
     set(target, key, value) {
-        if (key === "redPhosphorus") {
+        if (key === 'redPhosphorus') {
             if (target.allowDangerousOperations) {
-                return target["redPhosphorus"] = value;
+                return target['redPhosphorus'] = value;
             } else {
-                console.log("Too dangerous!");
-                return target["redPhosphorus"];
+                console.log('Too dangerous!');
+                return target['redPhosphorus'];
             }
 
         }

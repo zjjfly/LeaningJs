@@ -67,9 +67,9 @@
 
 //由于js的提升机制，es6之前可以直接使用typeof判断某个变量是否被初始化
 //但使用es6的let声明的变量，不可以使用typeof去判读是否已经声明,原因就是上面说的var和let的区别
-//但es6中用typeof去判读变量是否定义的需求比较少，所以一般不会有问题
+//但es6中用 typeof去判读变量是否定义的需求比较少，所以一般不会有问题
 //     if (typeof m === "undefined") {
-//         console.log("m doesn't exist or is undefined");
+//         console.log("m does not exist or is undefined");
 //     } else {
 //     }
 //     let m = 5;

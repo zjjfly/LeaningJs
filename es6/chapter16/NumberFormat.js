@@ -1,7 +1,7 @@
 /**
  * Created by zjjfly on 2016/10/7.
  */
-"use strict";
+'use strict';
 //js中数字的格式化的结果是String类型的值
 //固定小数位,如果比格式化之前的小数位少,会进行四舍五入,而不是截断
 let x=19.51;

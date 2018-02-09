@@ -1,7 +1,7 @@
 /**
  * Created by zjjfly on 16/9/14.
  */
-"use strict";
+'use strict';
 let funds = 50;
 let round = 0;
 while (funds > 1 && funds < 100) {
@@ -23,10 +23,10 @@ while (funds > 1 && funds < 100) {
             remain -= bet;
         } while (remain > 0);
     }
-    console.log("\tbet:" + Object.keys(bets).map(face=>`${face}: ${bets[face]} pence`).join(",") + `tatal: ${totalBet} pence`);
+    console.log('\tbet:' + Object.keys(bets).map(face=>`${face}: ${bets[face]} pence`).join(',') + `total: ${totalBet} pence`);
     funds = funds - totalBet;
     const hand = roll();
-    console.log(`\thand: ${hand.join(",")}`);
+    console.log(`\thand: ${hand.join(',')}`);
     let winnings = 0;
     hand.filter(face=>bets[face] > 0).forEach(face=>winnings += bets[face]);//使用es6的箭头函数简化下面的for循环
     // for (var i = 0; i < hand.length; i++) {
@@ -37,16 +37,16 @@ while (funds > 1 && funds < 100) {
     // }
     funds += winnings;
     round++;
-    console.log("\twinnings:" + winnings);
+    console.log('\twinnings:' + winnings);
 }
-console.log(`\tending funs: ${funds}`);
+console.log(`\tending funds: ${funds}`);
 
 function rand(m, n) {
     return m + Math.floor((n - m + 1) * Math.random());
 }
 
 function randFace() {
-    return ["crown", "anchor", "heart", "spade", "club", "diamond"][rand(0, 5)];
+    return ['crown', 'anchor', 'heart', 'spade', 'club', 'diamond'][rand(0, 5)];
 }
 
 function roll() {

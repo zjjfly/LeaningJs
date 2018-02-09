@@ -68,7 +68,7 @@ html.replace(/(href|class|id)\s{0,}=(["'])(.*?)\2.*?>/ig, function (m, g1, g2, g
     console.log(s);
     console.log(`attribute found at ${offset}. name: ${g1} value:${g3}`);
 });
-//使用mechanics作为替换函数
+//使用 mechanics作为替换函数
 console.log(html.replace(/<a.*?<\/a>/ig, sanitizeATag));
 //无论什么时候,只要你面对的问题涉及到在一个大的字符串中匹配一个小的子串,并对这个子串做一些处理,你都可以使用替换函数来完成
 
@@ -88,10 +88,10 @@ const inputs = ['john@doe.com',
 const emailMatcher = /\b[a-z][a-z0-9._-]*@[a-z][a-z0-9_-]+\.[a-z]+(?:\.[a-z]+)?\b/ig;
 console.log(inputs.map(s=>s.replace(emailMatcher, '<a href=\'mailto:$&\'>$&</a>')));
 //单词界定在找寻特定的单词时很有用
-console.log('count countdown discount recount accountable'.replace(/\bcount/ig, '哈哈'));//匹配count或count开头的
-console.log('count countdown discount recount accountable'.replace(/\bcount\B/ig, '哈哈'));//匹配count开头但不是count的单词
-console.log('count countdown discount recount accountable'.replace(/\Bcount\b/ig, '哈哈'));//匹配以count结尾但不是count的单词
-console.log('count countdown discount recount accountable'.replace(/\Bcount\B/ig, '哈哈'));//匹配含有count的单词,但count既不是在开头也不是在结尾
+console.log('count countdown discount recount accountable'.replace(/\bcount/ig, '哈哈'));//匹配 count或count开头的
+console.log('count countdown discount recount accountable'.replace(/\bcount\B/ig, '哈哈'));//匹配 count开头但不是count的单词
+console.log('count countdown discount recount accountable'.replace(/\Bcount\b/ig, '哈哈'));//匹配以 count结尾但不是count的单词
+console.log('count countdown discount recount accountable'.replace(/\Bcount\B/ig, '哈哈'));//匹配含有count的单词,但 count既不是在开头也不是在结尾
 
 //前瞻
 //校验密码 要有至少一个大写数字,一个数字,一个小写字母,不能有非数字非字母的字符

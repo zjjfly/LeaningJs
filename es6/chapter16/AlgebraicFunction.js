@@ -1,7 +1,7 @@
 /**
  * Created by zjjfly on 2016/10/7.
  */
-"use strict";
+'use strict';
 //幂运算
 console.log(Math.pow(2,3));
 console.log(Math.sqrt(16));

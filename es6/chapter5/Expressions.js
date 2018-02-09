@@ -2,7 +2,7 @@
  *
  * Created by zjjfly on 16/9/14.
  */
-"use strict";
+'use strict';
 const i = 5;
 const n = 3 - -i;//负号的优先级比减号高,正号的优先级比加号高
 const m = 2 + +i;
@@ -32,18 +32,18 @@ console.log(r5, r6, r7, r8);
 
 //模糊比较和严格比较
 //严格比较只当两个比较的的值是同一个对象或者是同一个原始类型且有相同的值时，才认为它们相等。
-const a = {name: "an object"};
-const b = {name: "an object"};
+const a = {name: 'an object'};
+const b = {name: 'an object'};
 console.log(a === b);//false，虽然内容相同，但不是同一个对象，所以不等
 console.log(a == b);//false，但不推荐
 //模糊比较会看两个比较的对象是否可以被强迫有相同的值,如字符串"3"和数字3，就会被认为是相等的。
-console.log("3" == 3);
+console.log('3' == 3);
 
 //NaN不等于任何其他东西，包括其自身
 console.log(NaN === NaN);//false
 console.log(NaN == NaN);//false
 // 判断一个值是否是NaN使用内置的isNaN这个函数
-console.log(isNaN("a"));
+console.log(isNaN('a'));
 
 //下面的这段代码会变成无限循环，因为js中小数的加减乘除会有意想不到的结果
 // let o = 0;
@@ -54,7 +54,7 @@ console.log(isNaN("a"));
 // console.log(`Stopped at ${o}`);
 // js中，两个不同的值比较的时候，必须相差大于Number.EPSILON这个值，才认为这两个值是不同的。
 // 所以比较两个小数是否相同，看他们的差值是否小于Number.EPSILON
-//使用Number.EPSILON可以进行改进
+//使用 Number.EPSILON可以进行改进
 let o = 0;
 while (true) {
     o += 0.1;
@@ -63,11 +63,11 @@ while (true) {
 console.log(`Stopped at ${o}`);
 
 //js认为是false的值:undefined,null,false,0,NaN,""
-if (!undefined&&!null&&!false&&!0&&!NaN&&!""){
-    console.log("1");
+if (!undefined&&!null&&!false&&!0&&!NaN&&!''){
+    console.log('1');
 }
 //js认为是true的值，这些需要注意：空对象，空数组，只包含空格的字符串，"false"字符串
-if({}&&[]&&" "&&"false"){
+if({}&&[]&&' '&&'false'){
     console.log(1);
 }
 
@@ -77,12 +77,12 @@ console.log(skipIt || xx);//true
 console.log(skipIt && xx);//0，因为使用&&和||逻辑运算符时，如果操作数不是布尔类型的，总是返回决定表达式最终到底true还是false的值
 //利用这一特性，可以做到在某个值是null或undefined的时候，给一个默认值
 let suppliedOptions;
-const options = suppliedOptions || { name: "Default" };
+const options = suppliedOptions || { name: 'Default' };
 console.log(options);
 
 //js也有java的三元操作符
 const doIt=false;
-console.log(doIt ? "Do it!" : "Don't do it!");
+console.log(doIt ? 'Do it!' : 'Don\'t do it!');
 
 // 逗号操作符,用逗号组合多个表达式,整个表达式最终的值由最后一个表达式决定
 let c=0,d=10,e;

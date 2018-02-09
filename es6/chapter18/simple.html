@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Simple HTMl</title>
@@ -41,7 +42,7 @@
             //可以使用...把它转成数组
             const arr = [...document.getElementsByTagName("p")];
             console.log(arr);
-            arr.map(e=>e.textContent).forEach(s=>console.log(s));
+            arr.map(e => e.textContent).forEach(s => console.log(s));
 
             //使用css选择器
             const nodeList = document.querySelectorAll("#content span");
@@ -93,12 +94,14 @@
                 });
             }
         };
+
         function changeData() {
             //搜索有特定属性的元素
             const highlightActions = document.querySelectorAll("[data-action='highlight']");
             highlightActions[0].dataset.containing = "giraffe";
             highlightActions[0].dataset.caseSensitive = "true";
         }
+
         function highlightParas(containing) {
             if (typeof containing === "string")
                 containing = new RegExp(`\\b${containing}\\b`, "i");
@@ -110,6 +113,7 @@
                 p.classList.add("highlight");
             }
         }
+
         function removeParaHighlights() {
             const paras = document.querySelectorAll("p.highlight");
             for (let p of paras) {
@@ -120,8 +124,8 @@
 
         function treeWalker() {
             var treeWalker = document.createTreeWalker(
-                    document.body,
-                    NodeFilter.SHOW_ELEMENT
+                document.body,
+                NodeFilter.SHOW_ELEMENT
             );
 
             var nodeList = [];
@@ -130,6 +134,7 @@
             console.log(nodeList);
             console.log(document.URL);
         }
+
         function printDOM(node, prefix) {
             console.log(prefix + node.nodeName);
             for (let i = 0; i < node.childNodes.length; i++) {
@@ -138,53 +143,60 @@
         }
     </script>
 </head>
+
 <body>
-<header>
-    <h1>Simple HTML</h1>
-</header>
-<div id="content">
-    <p>This is a <i>simple</i> HTML file.</p>
-    <div class="callout">
-        <p>This is as fancy as we"ll get!</p>
+    <header>
+        <h1>Simple HTML</h1>
+    </header>
+    <div id="content">
+        <p>This is a
+            <i>simple</i> HTML file.</p>
+        <div class="callout">
+            <p>This is as fancy as we"ll get!</p>
+        </div>
+        <p>IDs (such as
+            <span class="code">#content</span>) are unique (there can only be one per page).</p>
+        <p>Classes (such as
+            <span class="code">.callout</span>) can be used on many elements.</p>
+        <div id="callout2" class="callout fancy">
+            <p>A single HTML element can have multiple classes.</p>
+        </div>
     </div>
-    <p>IDs (such as <span class="code">#content</span>) are unique (there can only be one per page).</p>
-    <p>Classes (such as <span class="code">.callout</span>) can be used on many elements.</p>
-    <div id="callout2" class="callout fancy">
-        <p>A single HTML element can have multiple classes.</p>
+    <!--html5新引入的data属性-->
+    <button data-action="highlight" data-containing="unique"> Highlight paragraphs containing "unique"
+    </button>
+    <button data-action="removeHighlights">
+        Remove highlights
+    </button>
+    <div class="serverInfo">
+        Server is running on
+        <span data-replace="platform">???</span> with Node
+        <span data-replace="nodeVersion">???</span>. It has been up for
+        <span data-replace="uptime">???</span> seconds.
     </div>
-</div>
-<!--html5新引入的data属性-->
-<button data-action="highlight" data-containing="unique"> Highlight paragraphs containing "unique"
-</button>
-<button data-action="removeHighlights">
-    Remove highlights
-</button>
-<div class="serverInfo">
-    Server is running on <span data-replace="platform">???</span> with Node <span data-replace="nodeVersion">???</span>.
-    It has been up for <span data-replace="uptime">???</span> seconds.
-</div>
-<script !src="">
-    function refreshServerInfo() {
-        const req = new XMLHttpRequest();
-        req.addEventListener('load', function () {
-                    const data = JSON.parse(this.responseText);
-                    replace(data);
+    <script !src="">
+        function refreshServerInfo() {
+            const req = new XMLHttpRequest();
+            req.addEventListener('load', function () {
+                const data = JSON.parse(this.responseText);
+                replace(data);
+            });
+            req.open('GET', 'http://localhost:7070', true);
+            req.send();
+        }
+
+        function replace(data) {
+            const serverInfo = document.querySelector(".serverInfo");
+            for (let p of Object.keys(data)) {
+                const ele = serverInfo.querySelectorAll(`[data-replace="${p}"]`);
+                for (let r of ele) {
+                    r.textContent = data[p];
                 }
-        );
-        req.open('GET', 'http://localhost:7070', true);
-        req.send();
-    }
-    function replace(data) {
-        const serverInfo = document.querySelector(".serverInfo");
-         for (let p of Object.keys(data)) {
-             const ele = serverInfo.querySelectorAll(`[data-replace="${p}"]`);
-             for (let r of ele) {
-                 r.textContent=data[p];
-             }
-         }
-    }
-    refreshServerInfo();
-    setInterval(refreshServerInfo,3000);
-</script>
+            }
+        }
+        refreshServerInfo();
+        setInterval(refreshServerInfo, 3000);
+    </script>
 </body>
+
 </html>

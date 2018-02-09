@@ -16,8 +16,8 @@ const path = require('path');
 // fs.writeFile(__dirname+"/hello.txt","hello from Node!",err=>{
 //     if(err) return console.log("Error writing to file");
 // });
-//上面的代码平台兼容性不好,因为windows平台的文件分隔符不是/
-//可以使用Node的path模块解决这个问题
+//上面的代码平台兼容性不好,因为 Windows平台的文件分隔符不是/
+//可以使用 Node的path模块解决这个问题
 fs.writeFile(path.join(__dirname, 'hello.txt'), 'hello from Node!', err=> {
     if (err) return console.log('Error writing to file');
 });

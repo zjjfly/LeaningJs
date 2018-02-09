@@ -1,7 +1,7 @@
 /**
  * Created by zjjfly on 2016/10/13.
  */
-"use strict";
+'use strict';
 const USER_EMAIL = Symbol();
 class User {
     //getter setter方法
@@ -15,11 +15,11 @@ class User {
     }
 }
 const user = new User();
-user.setEmail("z@12.com");
+user.setEmail('z@12.com');
 console.log(user.getEmail());
 
 class Person {
-    //accssor prorperties 这个特性在as中也有
+    //accessor properties 这个特性在as中也有
     set Email(value) {
         if (!/@/.test(value)) throw new Error(`invalid email:${value}`);
         this[USER_EMAIL] = value;
@@ -31,7 +31,7 @@ class Person {
 }
 const person = new Person();
 //赋值的时候setter方法会被调用
-person.email = "d@ae.com";
+person.email = 'd@ae.com';
 //取值的时候getter会被调用
 console.log(person.email);
 

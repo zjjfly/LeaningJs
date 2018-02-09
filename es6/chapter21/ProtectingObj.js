@@ -3,7 +3,7 @@
  */
 'use strict';
 
-//js有三张保护对象不被随意修改的机制:frerzing sealing preventing extension
+//js有三种保护对象不被随意修改的机制:freezing sealing preventing extension
 
 //1.freezing 禁止对对象新增属性方法,禁止修改对象的任何属性,禁止修改属性的配置
 const appInfo = {

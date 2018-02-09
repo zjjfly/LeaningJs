@@ -1,22 +1,22 @@
 /**
  * Created by zjjfly on 2016/10/2.
  */
-"use strict";
+'use strict';
 //原生的date总是得到的是本地时间,这和它最开始用于浏览器有关，用户肯定是希望得到他所在时区的时间
 //为了能使用时区，引入一个js库：moment,使用 npm install --save-dev moment-timezone 安装
-const moment = require("moment-timezone");
+const moment = require('moment-timezone');
 
 //使用utc时间
 console.log(new Date(Date.UTC(2016, 10, 3)));
 
 //使用某时区的时间
-const d = moment.tz([2016, 9, 3, 9, 19], "America/Los_Angeles").toDate();
+const d = moment.tz([2016, 9, 3, 9, 19], 'America/Los_Angeles').toDate();
 console.log(d);//2016-10-03T16:19:00.000Z 月是从0开始计算的 0表示一月 1表示二月...
 
 //Date类型的前后台传递,使用json
 const before = {d: new Date()};
 console.log(before.d instanceof Date);
-const json = JSON.stringify(before);//无论什么时区的date,转成json的时候都变为utc时间
+const json = JSON.stringify(before);//无论什么时区的date,转成 json的时候都变为utc时间
 console.log(json);
 const after = JSON.parse(json);
 console.log(after);
@@ -44,13 +44,13 @@ console.log(date.toLocaleString());
 console.log(date.toLocaleTimeString());
 console.log(date.toTimeString());
 console.log(date.toUTCString());
-//使用moment.js的方法
-console.log(moment(date).format("YYYY-MM-DD"));
-console.log(moment(date).format("YYYY-MM-DD HH:mm"));
-console.log(moment(date).format("YYYY-MM-DD HH:mm Z"));
-console.log(moment(date).format("YYYY-MM-DD HH:mm [UTC]Z do"));//如果需要某些单词不要被解释成元字符,可以加[]
-console.log(moment(date).format("dddd,MMMM [the] Do,YYYY"));
-console.log(moment(date).format("h:mm a"));
+//使用 moment.js的方法
+console.log(moment(date).format('YYYY-MM-DD'));
+console.log(moment(date).format('YYYY-MM-DD HH:mm'));
+console.log(moment(date).format('YYYY-MM-DD HH:mm Z'));
+console.log(moment(date).format('YYYY-MM-DD HH:mm [UTC]Z do'));//如果需要某些单词不要被解释成元字符,可以加[]
+console.log(moment(date).format('dddd,MMMM [the] Do,YYYY'));
+console.log(moment(date).format('h:mm a'));
 // M和MM用数字表示月份,MMM用单词缩写表示月份,MMMM用完整单词表示月份
 //Z表示时区,dddd表示周几 Do表示第几天,do表示这星期第几天,a表示上午还是下午
 
@@ -76,28 +76,28 @@ console.log(dates.sort((a, b) => b - a));
 console.log(dates.sort((a, b) => a - b));
 //moment.js计算时间的便利方法
 let m=moment();//当前时间
-m.add(3,"days");//往后推三天
-console.log(m.format("YYYY-MM-DD HH:mm"));
-m.subtract(2,"years");
-console.log(m.format("YYYY-MM-DD HH:mm"));
+m.add(3,'days');//往后推三天
+console.log(m.format('YYYY-MM-DD HH:mm'));
+m.subtract(2,'years');
+console.log(m.format('YYYY-MM-DD HH:mm'));
 
 m=moment();
-m.startOf("year");//一年的第一天
-console.log(m.format("YYYY-MM-DD HH:mm"));
-m.endOf("month");//当月的最后一天
-console.log(m.format("YYYY-MM-DD HH:mm"));
+m.startOf('year');//一年的第一天
+console.log(m.format('YYYY-MM-DD HH:mm'));
+m.endOf('month');//当月的最后一天
+console.log(m.format('YYYY-MM-DD HH:mm'));
 //支持链式操作
 m=moment()
-    .add(10,"hours")
-    .subtract(3,"days")
-    .endOf("month");
-console.log(m.format("YYYY-MM-DD HH:mm"));
+    .add(10,'hours')
+    .subtract(3,'days')
+    .endOf('month');
+console.log(m.format('YYYY-MM-DD HH:mm'));
 
 //用户友好的相对时间
-console.log(moment().subtract(10,"secomds").fromNow());
-console.log(moment().subtract(45,"secomds").fromNow());
-console.log(moment().subtract(5,"minutes").fromNow());
-console.log(moment().subtract(44,"minutes").fromNow());
-console.log(moment().subtract(45,"minutes").fromNow());
+console.log(moment().subtract(45,'seconds').fromNow());
+console.log(moment().subtract(10,'seconds').fromNow());
+console.log(moment().subtract(5,'minutes').fromNow());
+console.log(moment().subtract(44,'minutes').fromNow());
+console.log(moment().subtract(45,'minutes').fromNow());
 
 

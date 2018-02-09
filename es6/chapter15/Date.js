@@ -1,7 +1,7 @@
 /**
  * Created by zjjfly on 2016/10/2.
  */
-"use strict";
+'use strict';
 //初始化Date的时候，可以传入年月日 时分秒
 new Date();
 new Date(2016,10);
@@ -24,7 +24,7 @@ const date3 = new Date(-365*24*60*60*1000);
 console.log(date3);
 
 //还可以直接传入时间字符串,默认转成本地时间
-const date4 = new Date("June 14, 1903");
+const date4 = new Date('June 14, 1903');
 console.log(date4);
-const date5 = new Date("June 14, 1903 GMT-0000");
+const date5 = new Date('June 14, 1903 GMT-0000');
 console.log(date5.valueOf());//得到毫秒数

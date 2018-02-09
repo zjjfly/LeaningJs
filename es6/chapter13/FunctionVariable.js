@@ -1,11 +1,11 @@
 /**
  * Created by zjjfly on 2016/9/29.
  */
-"use strict";
+'use strict';
 //函数做参数
 function sum(arr, f) {
     //处理传入的f不是函数的情况
-    if (typeof f != "function") f = x => x;
+    if (typeof f != 'function') f = x => x;
     return arr.reduce((a, x) => a += f(x), 0);
 }
 console.log(sum([1,2,3]));

@@ -1,60 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Event Propagation</title>
 </head>
+
 <body>
-<div>
-<button>Click Me!</button>
-</div>
-<script>
-    // this creates an event handler and returns it
-    function logEvent(handlerName, type, cancel, stop, stopImmediate) {
-        // this is the actual event handler
-        return function (evt) {
-            if (cancel) evt.preventDefault();
-            if (stop) evt.stopPropagation();
-            if (stopImmediate) evt.stopImmediatePropagation();
-            console.log(`${type}: ${handlerName}` +
+    <div>
+        <button>Click Me!</button>
+    </div>
+    <script>
+        // this creates an event handler and returns it
+        function logEvent(handlerName, type, cancel, stop, stopImmediate) {
+            // this is the actual event handler
+            return function (evt) {
+                if (cancel) evt.preventDefault();
+                if (stop) evt.stopPropagation();
+                if (stopImmediate) evt.stopImmediatePropagation();
+                console.log(`${type}: ${handlerName}` +
                     (evt.defaultPrevented ? " (canceled)" : ""));
+            }
         }
-    }
-    // this adds an event logger to an element
-    function addEventLogger(elt, type, action) {
-        const capture = type === "capture";
-        elt.addEventListener("click",
+        // this adds an event logger to an element
+        function addEventLogger(elt, type, action) {
+            const capture = type === "capture";
+            elt.addEventListener("click",
                 logEvent(elt.tagName, type, action === "cancel",
-                        action === "stop", action === "stop!"), capture);
-    }
-    //事件的传播有两种,捕获和冒泡
-    //html5为了同时支持这两种,先是从最远的祖先一路向下到目标元素(捕获),然后在从目标元素冒泡回到最远的祖先
+                    action === "stop", action === "stop!"), capture);
+        }
+        //事件的传播有两种,捕获和冒泡
+        //html5为了同时支持这两种,先是从最远的祖先一路向下到目标元素(捕获),然后在从目标元素冒泡回到最远的祖先
 
-    //任何事件处理器可以做三件事中的一件来影响其他的处理器
-    //1.调用preventDefault,它会把defaultPrevented这个属性设为true,浏览器的内置处理器会遵从这个属性不对事件做任何处理
-    //2.调用stopPropagation,它会阻止事件进一步传播(当前元素的处理器还是会调用)
-    //3.调用stopImmediatePropagation,它会立即停止事件的传播(当前元素的其他处理器不会被调用)
+        //任何事件处理器可以做三件事中的一件来影响其他的处理器
+        //1.调用preventDefault,它会把 defaultPrevented这个属性设为true,浏览器的内置处理器会遵从这个属性不对事件做任何处理
+        //2.调用stopPropagation,它会阻止事件进一步传播(当前元素的处理器还是会调用)
+        //3.调用stopImmediatePropagation,它会立即停止事件的传播(当前元素的其他处理器不会被调用)
 
-    const body = document.querySelector("body");
-    const div = document.querySelector("div");
-    const button = document.querySelector("button");
-//    addEventLogger(body, "bubble");
-//    addEventLogger(body, "capture");
-//    addEventLogger(div, "bubble");
-//    addEventLogger(div, "capture");
-    //在事件真正产生的元素上,handler的调用属性取决于它们添加的顺序
-    //其他元素还是遵循先捕获后冒泡的顺序
-//    addEventLogger(button, "bubble");
-//    addEventLogger(button, "capture");
+        const body = document.querySelector("body");
+        const div = document.querySelector("div");
+        const button = document.querySelector("button");
+        //    addEventLogger(body, "bubble");
+        //    addEventLogger(body, "capture");
+        //    addEventLogger(div, "bubble");
+        //    addEventLogger(div, "capture");
+        //在事件真正产生的元素上,handler的调用属性取决于它们添加的顺序
+        //其他元素还是遵循先捕获后冒泡的顺序
+        //    addEventLogger(button, "bubble");
+        //    addEventLogger(button, "capture");
 
-    addEventLogger(body, "capture");
-    addEventLogger(body, "bubble");
-    addEventLogger(div, "capture", "cancel");
-    addEventLogger(div, "bubble");
-//    addEventLogger(button, "capture");
-//    addEventLogger(button, "capture","stop");
-    addEventLogger(button, "capture","stop!");
-    addEventLogger(button, "bubble");
-</script>
+        addEventLogger(body, "capture");
+        addEventLogger(body, "bubble");
+        addEventLogger(div, "capture", "cancel");
+        addEventLogger(div, "bubble");
+        //    addEventLogger(button, "capture");
+        //    addEventLogger(button, "capture","stop");
+        addEventLogger(button, "capture", "stop!");
+        addEventLogger(button, "bubble");
+    </script>
 </body>
+
 </html>

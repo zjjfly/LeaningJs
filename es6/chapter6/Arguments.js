@@ -1,16 +1,16 @@
 /**
  * Created by zjjfly on 16/9/16.
  */
-"use strict";
+'use strict';
 function f(o) {
-    o.message = "set in f";
+    o.message = 'set in f';
     o = {
-        message: "new object"
+        message: 'new object'
     };
     console.log(`inside f:o.message="${o.message}" (after assignment)`);
 }
 let o = {
-    message: "initial value"
+    message: 'initial value'
 };
 console.log(`before calling f:o.message="${o.message}"`);
 f(o);
@@ -31,26 +31,26 @@ function getSentenceFromObj({subject, verb, object}) {
     return `${subject} ${verb} ${object}`;
 }
 const obj = {
-    subject: "I",
-    verb: "love",
-    object: "JS"
+    subject: 'I',
+    verb: 'love',
+    object: 'JS'
 };
 console.log(getSentenceFromObj(obj));
 //函数参数直接解构数组
 function getSentenceFromArray([subject, verb, object]) {
     return `${subject} ${verb} ${object}`;
 }
-const arr = ["I", "love", "JS"];
+const arr = ['I', 'love', 'JS'];
 console.log(getSentenceFromArray(arr));
 //和给变量赋值一样，可以用...收集剩下的参数，放入一个数组
 function addPrefix(prefix, ...words) {
     const prefixWords = words.map(s=>prefix + s);
     return prefixWords;
 }
-console.log(addPrefix("con", "verse", "vex"));
+console.log(addPrefix('con', 'verse', 'vex'));
 
 //es6新特性:默认参数，这个特性as也有
-function fx(a, b = "default",c=3) {
+function fx(a, b = 'default',c=3) {
     return `${a}-${b}-${c}`;
 }
 console.log(fx(1));

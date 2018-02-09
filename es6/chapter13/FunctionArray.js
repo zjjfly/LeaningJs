@@ -1,7 +1,7 @@
 /**
  * Created by zjjfly on 2016/9/29.
  */
-"use strict";
+'use strict';
 //一般把函数放在数组作为一个管道，顺序的执型函数。比如做图像处理的时候
 const sin = Math.sin;
 const cos = Math.cos;

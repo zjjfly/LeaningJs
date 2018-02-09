@@ -2,7 +2,7 @@
  * Created by zjjfly on 16/9/10.
  */
 
-"use strict";
+'use strict';
 let count=10;
 const blue=0x0000ff;//十六进制
 const umask=0o0022;//八进制

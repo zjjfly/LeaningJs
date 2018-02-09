@@ -1,16 +1,16 @@
 /**
  * Created by zjjfly on 2016/9/28.
  */
-require("babel-polyfill");
+require('babel-polyfill');
 (function () {
-    "use strict";
+    'use strict';
     const book = [
-        "Twinkle, twinkle, little bat!",
-        "How I wonder what you're at!",
-        "Up above the world you fly,",
-        "Like a tea tray in the sky.",
-        "Twinkle, twinkle, little bat!",
-        "How I wonder what you're at!",
+        'Twinkle, twinkle, little bat!',
+        'How I wonder what you\'re at!',
+        'Up above the world you fly,',
+        'Like a tea tray in the sky.',
+        'Twinkle, twinkle, little bat!',
+        'How I wonder what you\'re at!',
     ];
     const it = book.values();
     let current = it.next();
@@ -22,7 +22,7 @@ require("babel-polyfill");
 
     //iterator protocol 使得任意对象都可以被迭代
     //iterator protocol 说的是，如果你的类提供了一个Symbol.iterator方法
-    //这个方法返回一个有迭代器行为(有next方法,返回一个带value和done属性的对象)的对象，那么这个类就变成可迭代的了
+    //这个方法返回一个有迭代器行为(有next方法,返回一个带 value和done属性的对象)的对象，那么这个类就变成可迭代的了
     class Log {
         constructor() {
             this.messages = [];
@@ -37,13 +37,13 @@ require("babel-polyfill");
         }
     }
     const log = new Log();
-    log.add("first day at sea");
-    log.add("spotted whale");
-    log.add("spotted another vessel");
+    log.add('first day at sea');
+    log.add('spotted whale');
+    log.add('spotted another vessel');
     for (let entry of log) {
         console.log(`${entry.message} @ ${entry.timestamp}`);
     }
-    // 上面的代码直接返回Array对象的values方法的值，下面我们自定义一个带next方法的对象
+    // 上面的代码直接返回 Array对象的values方法的值，下面我们自定义一个带next方法的对象
     class Logs{
         constructor() {
             this.messages = [];
@@ -68,9 +68,9 @@ require("babel-polyfill");
     }
 
     const logs = new Logs();
-    logs.add("jjzi");
-    logs.add("zjj");
-    logs.add("z");
+    logs.add('jjzi');
+    logs.add('zjj');
+    logs.add('z');
     for (let entry of logs) {
         console.log(`${entry.message} @ ${entry.timestamp}`);
     }
